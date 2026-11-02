@@ -1,0 +1,12 @@
+$text-color: hsl(0, 0%, 100%);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-image: url("/src/assets/images/background-desktop.png");
+  color: $text-color;
+  font-family: "Inconsolata";
+}

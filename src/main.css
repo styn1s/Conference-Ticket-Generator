@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-image: url("/src/assets/images/background-desktop.png");
+  color: hsl(0, 0%, 100%);
+  font-family: "Inconsolata";
+}/*# sourceMappingURL=main.css.map */
