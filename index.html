@@ -28,43 +28,39 @@
       </div>
     </header>
 
-    <main>
+    <main class="main">
       <form
         action=""
-        class="ticket-form"
+        class="main__ticket-form"
         id="ticket-form"
         name="ticket-form"
         method="get"
       >
-        <div class="ticket-form__field">
-          <label class="ticket-form__label" for="avatar">Upload avatar</label>
-          <div class="avatar-upload" id="avatar-wrapper">
-            <input
-              class="avatar-upload__input"
-              type="file"
-              name="avatar"
-              id="avatar"
-            />
-            <p class="avatar-upload__text">Drag and drop or click to upload</p>
-          </div>
-          <p class="ticket-form__hint">
-            Upload your photo (JPG or PNG, max size: 500KB).
-          </p>
-        </div>
-
-        <div class="ticket-form__field">
-          <label class="ticket-form__label" for="fullname">Full Name</label>
+        <label class="ticket-form__label" for="avatar">Upload avatar</label>
+        <div class="avatar-upload" id="avatar-wrapper">
           <input
-            class="ticket-from__input"
-            type="text"
-            name="fullname"
-            id="fullname"
+            class="avatar-upload__input"
+            type="file"
+            name="avatar"
+            id="avatar"
           />
+          <p class="avatar-upload__text">Drag and drop or click to upload</p>
         </div>
+        <p class="ticket-form__hint">
+          Upload your photo (JPG or PNG, max size: 500KB).
+        </p>
+
+        <label class="ticket-form__label" for="fullname">Full Name</label>
+        <input
+          class="ticket-form__input"
+          type="text"
+          name="fullname"
+          id="fullname"
+        />
 
         <label class="ticket-form__label" for="email">Email Address</label>
         <input
-          class="ticket-from__input"
+          class="ticket-form__input"
           type="email"
           name="email"
           id="email"
@@ -73,7 +69,7 @@
 
         <label class="ticket-from__label" for="github">GitHub Username</label>
         <input
-          class="ticket-from__input"
+          class="ticket-form__input"
           type="text"
           name="github"
           id="github"

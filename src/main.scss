@@ -1,12 +1,117 @@
-$text-color: hsl(0, 0%, 100%);
+$primary-color: hsl(0, 0%, 100%);
+$secondary-color: hsl(252, 6%, 83%);
+$hint-color: hsl(245, 15%, 58%);
+$submit-color: hsl(248, 70%, 10%);
+$orange: hsl(7, 88%, 67%);
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  background-image: url("/src/assets/images/background-desktop.png");
-  color: $text-color;
+  background-image: url("/src/assets/images/background-mobile.png");
+  background-repeat: no-repeat;
+  background-position: 0 -78rem;
+  color: $primary-color;
   font-family: "Inconsolata";
+}
+
+.header,
+.main__ticket-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  align-items: center;
+  justify-content: center;
+}
+
+.main__ticket-form {
+  width: 90%;
+  margin: auto;
+  justify-content: flex-start;
+}
+
+.header__logo {
+  width: 10.625rem;
+  margin: 2.5rem 0 2.5rem;
+}
+
+.hero {
+  text-align: center;
+
+  &__title {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 1.7rem;
+  }
+
+  &__text {
+    width: 90%;
+    margin: 1.25rem auto;
+    font-size: 1.1563rem;
+    color: $secondary-color;
+  }
+}
+
+.ticket-form__label,
+.avatar-upload__text {
+  font-size: 1.1563rem;
+}
+
+.avatar-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.avatar-upload__text {
+  color: $secondary-color;
+}
+
+.ticket-form__hint {
+  line-height: 1.6;
+  padding-left: 1.25rem;
+  font-size: 0.75rem;
+  color: $hint-color;
+  background-image: url("/src/assets/images/icon-info.svg");
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.ticket-form__label[for="fullname"] {
+  margin-top: 1.25rem;
+}
+
+.ticket-form__input {
+  height: 2.5rem;
+  margin: .625rem 0 1.25rem;
+  padding-left: .8rem;
+  border: .0625rem solid $hint-color;
+  border-radius: .5rem;
+  font-family: "Inconsolata";
+  color: $secondary-color;
+  background: rgba(255,255,255,0.1);
+
+  &::placeholder {
+    font-family: "Inconsolata";
+    color: $secondary-color;
+  }
+}
+
+.ticket-form__submit {
+  height: 2.5rem;
+  border: none;
+  border-radius: .5rem;
+  font: bold 1rem "Inconsolata";
+  color: $submit-color;
+  background-color: $orange;
 }
