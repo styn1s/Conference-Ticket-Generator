@@ -71,6 +71,26 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border: .0938rem dashed $hint-color;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.1);
+}
+
+.avatar-upload__label {
+  padding: .625rem;
+  border: 1px solid $hint-color;
+  border-radius: .75rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.avatar-upload__icon {
+  display: block;
+}
+
+.avatar-upload__input {
+  display: none;
 }
 
 .avatar-upload__text {
@@ -96,7 +116,7 @@ body {
   margin: .625rem 0 1.25rem;
   padding-left: .8rem;
   border: .0625rem solid $hint-color;
-  border-radius: .5rem;
+  border-radius: .75rem;
   font-family: "Inconsolata";
   color: $secondary-color;
   background: rgba(255,255,255,0.1);

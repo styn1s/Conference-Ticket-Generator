@@ -38,12 +38,15 @@
       >
         <label class="ticket-form__label" for="avatar">Upload avatar</label>
         <div class="avatar-upload" id="avatar-wrapper">
-          <input
-            class="avatar-upload__input"
-            type="file"
-            name="avatar"
-            id="avatar"
-          />
+          <label class="avatar-upload__label" for="avatar"
+            ><img src="/src/assets/images/icon-upload.svg" alt="Upload icon" class="avatar-upload__icon">
+            <input
+              class="avatar-upload__input"
+              type="file"
+              name="avatar"
+              id="avatar"
+              accept="image/*"
+          /></label>
           <p class="avatar-upload__text">Drag and drop or click to upload</p>
         </div>
         <p class="ticket-form__hint">
