@@ -36,19 +36,30 @@
         name="ticket-form"
         method="get"
       >
+
         <label class="ticket-form__label" for="avatar">Upload avatar</label>
-        <div class="avatar-upload" id="avatar-wrapper">
-          <label class="avatar-upload__label" for="avatar"
-            ><img src="/src/assets/images/icon-upload.svg" alt="Upload icon" class="avatar-upload__icon">
+        <label class="dropzone" id="dropzone" for="avatar-input">
+          <div class="dropzone__avatar-wrapper" id="avatar-wrapper">
+            <img
+              src="/src/assets/images/icon-upload.svg"
+              class="dropzone__icon"
+              id="avatar-icon"
+              alt="Upload icon"
+            />
             <input
-              class="avatar-upload__input"
+              class="dropzone__input"
               type="file"
               name="avatar"
-              id="avatar"
+              id="avatar-input"
               accept="image/*"
-          /></label>
-          <p class="avatar-upload__text">Drag and drop or click to upload</p>
-        </div>
+            />
+          </div>
+          <div class="dropzone__btns-wrapper" id="btnsWrapper">
+            <button class="dropzone__btn" id="remove-btn">Remove image</button>
+            <button class="dropzone__btn" id="change-btn">Change image</button>
+          </div>
+          <p class="dropzone__text" id="dropzone-text">Drag and drop or click to upload</p>
+        </label>
         <p class="ticket-form__hint">
           Upload your photo (JPG or PNG, max size: 500KB).
         </p>

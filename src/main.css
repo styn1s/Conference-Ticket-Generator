@@ -1,19 +1,19 @@
 * {
   box-sizing: border-box;
+  font-family: "Inconsolata";
 }
 
 html,
 body {
-  height: 100%;
+  height: 110%;
 }
 
 body {
   margin: 0;
   background-image: url("/src/assets/images/background-mobile.png");
   background-repeat: no-repeat;
-  background-position: 0 -78rem;
+  background-position: 0 -68rem;
   color: hsl(0, 0%, 100%);
-  font-family: "Inconsolata";
 }
 
 .header,
@@ -54,11 +54,11 @@ body {
 }
 
 .ticket-form__label,
-.avatar-upload__text {
+.dropzone__text {
   font-size: 1.1563rem;
 }
 
-.avatar-upload {
+.dropzone {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,24 +68,47 @@ body {
   border: 0.0938rem dashed hsl(245, 15%, 58%);
   border-radius: 1rem;
   background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
 }
 
-.avatar-upload__label {
+.dropzone__avatar-wrapper {
+  width: 3.2062rem;
+  height: 3.2062rem;
   padding: 0.625rem;
   border: 1px solid hsl(245, 15%, 58%);
   border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.1);
+  background-position: center;
+  background-size: cover;
 }
 
 .avatar-upload__icon {
   display: block;
 }
 
-.avatar-upload__input {
+.dropzone__btns-wrapper {
+  display: none;
+  margin: 1.25rem 0;
+}
+
+.dropzone__btn {
+  padding: 0.5rem 0.625rem;
+  border: none;
+  border-radius: 0.3125rem;
+  color: hsl(0, 0%, 100%);
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+.dropzone__btn:first-child {
+  text-decoration: underline;
+  text-underline-offset: 0.1875rem;
+}
+
+.dropzone__input {
   display: none;
 }
 
-.avatar-upload__text {
+.dropzone__text {
   color: hsl(252, 6%, 83%);
 }
 
