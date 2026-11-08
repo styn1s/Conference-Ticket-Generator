@@ -6,9 +6,11 @@
 html,
 body {
   height: 110%;
+  overflow-x: hidden;
 }
 
 body {
+  position: relative;
   margin: 0;
   background-image: url("/src/assets/images/background-mobile.png");
   background-repeat: no-repeat;
@@ -127,11 +129,11 @@ body {
 }
 
 .ticket-form__input {
-  height: 2.5rem;
+  height: 2.8rem;
   margin: 0.625rem 0 1.25rem;
   padding-left: 0.8rem;
   border: 0.0625rem solid hsl(245, 15%, 58%);
-  border-radius: 0.75rem;
+  border-radius: 0.6rem;
   font-family: "Inconsolata";
   color: hsl(252, 6%, 83%);
   background: rgba(255, 255, 255, 0.1);
@@ -152,4 +154,44 @@ body {
   font: bold 1rem "Inconsolata";
   color: hsl(248, 70%, 10%);
   background-color: hsl(7, 88%, 67%);
+}
+
+#pattern-circle-top {
+  position: absolute;
+  top: -4%;
+  left: -6%;
+  width: 30%;
+  z-index: -1;
+}
+
+#pattern-lines {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 260%;
+  z-index: -1;
+}
+
+#pattern-line-top {
+  position: absolute;
+  top: 3%;
+  right: 0;
+  width: 30%;
+  z-index: -1;
+}
+
+#pattern-circle-middle {
+  position: absolute;
+  bottom: 31.5%;
+  right: -12%;
+  width: 27%;
+  z-index: -1;
+}
+
+#pattern-line-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  z-index: -1;
 }/*# sourceMappingURL=main.css.map */

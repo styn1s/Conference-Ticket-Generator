@@ -12,15 +12,16 @@ $orange: hsl(7, 88%, 67%);
 html,
 body {
   height: 110%;
+  overflow-x: hidden;
 }
 
 body {
+  position: relative;
   margin: 0;
   background-image: url("/src/assets/images/background-mobile.png");
   background-repeat: no-repeat;
   background-position: 0 -68rem;
   color: $primary-color;
-  
 }
 
 .header,
@@ -137,11 +138,11 @@ body {
 }
 
 .ticket-form__input {
-  height: 2.5rem;
+  height: 2.8rem;
   margin: .625rem 0 1.25rem;
   padding-left: .8rem;
   border: .0625rem solid $hint-color;
-  border-radius: .75rem;
+  border-radius: .6rem;
   font-family: "Inconsolata";
   color: $secondary-color;
   background: rgba(255,255,255,0.1);
@@ -159,4 +160,44 @@ body {
   font: bold 1rem "Inconsolata";
   color: $submit-color;
   background-color: $orange;
+}
+
+#pattern-circle-top {
+  position: absolute;
+  top: -4%;
+  left: -6%;
+  width: 30%;
+  z-index: -1;
+}
+
+#pattern-lines {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 260%;
+  z-index: -1;
+}
+
+#pattern-line-top {
+  position: absolute;
+  top: 3%;
+  right: 0;
+  width: 30%;
+  z-index: -1;
+}
+
+#pattern-circle-middle {
+  position: absolute;
+  bottom: 31.5%;
+  right: -12%;
+  width: 27%;
+  z-index: -1;
+}
+
+#pattern-line-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  z-index: -1;
 }

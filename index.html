@@ -36,7 +36,6 @@
         name="ticket-form"
         method="get"
       >
-
         <label class="ticket-form__label" for="avatar">Upload avatar</label>
         <label class="dropzone" id="dropzone" for="avatar-input">
           <div class="dropzone__avatar-wrapper" id="avatar-wrapper">
@@ -58,7 +57,9 @@
             <button class="dropzone__btn" id="remove-btn">Remove image</button>
             <button class="dropzone__btn" id="change-btn">Change image</button>
           </div>
-          <p class="dropzone__text" id="dropzone-text">Drag and drop or click to upload</p>
+          <p class="dropzone__text" id="dropzone-text">
+            Drag and drop or click to upload
+          </p>
         </label>
         <p class="ticket-form__hint">
           Upload your photo (JPG or PNG, max size: 500KB).
@@ -97,6 +98,32 @@
         />
       </form>
     </main>
+
+    <img
+      id="pattern-circle-top"
+      src="/src/assets/images/pattern-circle.svg"
+      alt="Circle top pattern"
+    />
+    <img
+      id="pattern-lines"
+      src="/src/assets/images/pattern-lines.svg"
+      alt="Lines pattern"
+    />
+    <img
+      id="pattern-line-top"
+      src="/src/assets/images/pattern-squiggly-line-top.svg"
+      alt="Line top pattern"
+    />
+    <img
+      id="pattern-circle-middle"
+      src="/src/assets/images/pattern-circle.svg"
+      alt="Circle middle pattern"
+    />
+    <img
+      id="pattern-line-bottom"
+      src="/src/assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg"
+      alt="Line bottom pattern"
+    />
 
     <script type="module" src="/src/main.js"></script>
   </body>
