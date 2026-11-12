@@ -70,6 +70,7 @@ body {
 }
 
 .dropzone {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,16 +79,15 @@ body {
   padding-top: 1rem;
   border: .0938rem dashed $hint-color;
   border-radius: 1rem;
-  background: rgba(255,255,255,0.1);
   cursor: pointer;
 }
 
 .dropzone__avatar-wrapper {
   width: 3.2062rem;
   height: 3.2062rem;
-  padding: .625rem;
+  padding: 0.625rem;
   border: 1px solid $hint-color;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.1);
   background-position: center;
   background-size: cover;
@@ -103,21 +103,35 @@ body {
 }
 
 .dropzone__btn {
-  padding: .5rem .625rem;
+  padding: 0.5rem 0.625rem;
   border: none;
-  border-radius: .3125rem;
+  border-radius: 0.3125rem;
   color: $primary-color;
   background: rgb(255, 255, 255, 0.1);
   cursor: pointer;
 
   &:first-child {
     text-decoration: underline;
-    text-underline-offset: .1875rem;
+    text-underline-offset: 0.1875rem;
   }
 }
 
 .dropzone__input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+}
+
+.dropzone:has(.dropzone__input:focus),
+.ticket-form__input:focus {
+  outline: 2px solid $hint-color;
+  outline-offset: 3px;
+}
+
+.dropzone,
+.ticket-form__input {
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
 }
 
 .dropzone__text {
@@ -140,13 +154,13 @@ body {
 
 .ticket-form__input {
   height: 2.8rem;
-  margin: .625rem 0 1.25rem;
-  padding-left: .8rem;
-  border: .0625rem solid $hint-color;
-  border-radius: .6rem;
+  margin: 0.625rem 0 1.25rem;
+  padding-left: 0.8rem;
+  border: 0.0625rem solid $hint-color;
+  border-radius: 0.6rem;
   font-family: "Inconsolata";
   color: $secondary-color;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 
   &::placeholder {
     font-family: "Inconsolata";
@@ -157,10 +171,11 @@ body {
 .ticket-form__submit {
   height: 2.5rem;
   border: none;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   font: bold 1rem "Inconsolata";
   color: $submit-color;
   background-color: $orange;
+  cursor: pointer;
 }
 
 #pattern-circle-top {
