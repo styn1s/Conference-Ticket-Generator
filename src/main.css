@@ -129,13 +129,34 @@ body {
 }
 
 .ticket-form__hint {
+  position: relative;
   line-height: 1.6;
-  padding-left: 1.25rem;
+  padding-left: 1.5rem;
   font-size: 0.75rem;
   color: hsl(245, 15%, 58%);
-  background-image: url("/src/assets/images/icon-info.svg");
-  background-repeat: no-repeat;
-  background-position: left center;
+}
+
+.ticket-form__hint--error {
+  color: hsl(7, 88%, 67%);
+}
+
+.ticket-form__hint-ico {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: hsl(245, 15%, 58%);
+  -webkit-mask-image: url("/src/assets/images/icon-info.svg");
+          mask-image: url("/src/assets/images/icon-info.svg");
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+.ticket-form__hint-ico--error {
+  background-color: hsl(7, 88%, 67%);
 }
 
 .ticket-form__label[for=fullname] {

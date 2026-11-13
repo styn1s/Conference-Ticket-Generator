@@ -85,9 +85,9 @@ body {
 .dropzone__avatar-wrapper {
   width: 3.2062rem;
   height: 3.2062rem;
-  padding: 0.625rem;
+  padding: .625rem;
   border: 1px solid $hint-color;
-  border-radius: 0.75rem;
+  border-radius: .75rem;
   background: rgba(255, 255, 255, 0.1);
   background-position: center;
   background-size: cover;
@@ -103,16 +103,16 @@ body {
 }
 
 .dropzone__btn {
-  padding: 0.5rem 0.625rem;
+  padding: .5rem .625rem;
   border: none;
-  border-radius: 0.3125rem;
+  border-radius: .3125rem;
   color: $primary-color;
   background: rgb(255, 255, 255, 0.1);
   cursor: pointer;
 
   &:first-child {
     text-decoration: underline;
-    text-underline-offset: 0.1875rem;
+    text-underline-offset: .1875rem;
   }
 }
 
@@ -139,13 +139,32 @@ body {
 }
 
 .ticket-form__hint {
+  position: relative;
   line-height: 1.6;
-  padding-left: 1.25rem;
-  font-size: 0.75rem;
+  padding-left: 1.5rem;
+  font-size: .75rem;
   color: $hint-color;
-  background-image: url("/src/assets/images/icon-info.svg");
-  background-repeat: no-repeat;
-  background-position: left center;
+}
+
+.ticket-form__hint--error {
+  color: $orange;
+}
+
+.ticket-form__hint-ico {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: $hint-color;
+  mask-image: url("/src/assets/images/icon-info.svg");
+  mask-repeat: no-repeat;
+}
+
+.ticket-form__hint-ico--error {
+  background-color: $orange;
 }
 
 .ticket-form__label[for="fullname"] {
@@ -154,10 +173,10 @@ body {
 
 .ticket-form__input {
   height: 2.8rem;
-  margin: 0.625rem 0 1.25rem;
-  padding-left: 0.8rem;
-  border: 0.0625rem solid $hint-color;
-  border-radius: 0.6rem;
+  margin: .625rem 0 1.25rem;
+  padding-left: .8rem;
+  border: .0625rem solid $hint-color;
+  border-radius: .6rem;
   font-family: "Inconsolata";
   color: $secondary-color;
   background: rgba(255, 255, 255, 0.1);
@@ -171,7 +190,7 @@ body {
 .ticket-form__submit {
   height: 2.5rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: .5rem;
   font: bold 1rem "Inconsolata";
   color: $submit-color;
   background-color: $orange;

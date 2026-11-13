@@ -1,6 +1,10 @@
+const MAX_SIZE = 500 * 1024;
+
 const dropzone = document.getElementById("dropzone");
 const avatarWrapper = document.getElementById("avatar-wrapper");
 const fileInput = document.getElementById("avatar-input");
+const fileHint = document.getElementById("file-hint");
+const fileHintIco = document.getElementById("file-hint-ico");
 const avatarIcon = document.getElementById("avatar-icon");
 const btnsWrapper = document.getElementById("btnsWrapper");
 const removeBtn = document.getElementById("remove-btn");
@@ -22,17 +26,26 @@ dropzone.addEventListener("drop", function (e) {
 removeBtn.addEventListener("click", (e) => {
   e.preventDefault();
   removeAvatar();
-})
+});
 
 changeBtn.addEventListener("click", (e) => {
   e.preventDefault();
   fileInput.click();
-})
+});
 
 function uploadAvatar() {
-  let avatarLink = URL.createObjectURL(fileInput.files[0]);
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  if (file.size > MAX_SIZE) {
+    showFileError();
+    return;
+  }
+
+  let avatarLink = URL.createObjectURL(file);
   avatarWrapper.style.backgroundImage = `url(${avatarLink})`;
   avatarIcon.style.display = "none";
+  fileHint.innerText = "";
   showBtns();
 }
 
@@ -46,4 +59,10 @@ function removeAvatar() {
   btnsWrapper.style.display = "none";
   avatarIcon.style.display = "block";
   dropzoneText.style.display = "block";
+}
+
+function showFileError() {
+  fileHint.innerHTML =
+    "<span class='ticket-form__hint-ico ticket-form__hint-ico--error'></span>File too large. Please upload a photo under 500KB.";
+  fileHint.classList.add("ticket-form__hint--error");
 }
