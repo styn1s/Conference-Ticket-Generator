@@ -1,10 +1,14 @@
 const MAX_SIZE = 500 * 1024;
 
+const form = document.getElementById("ticket-form");
 const dropzone = document.getElementById("dropzone");
 const avatarWrapper = document.getElementById("avatar-wrapper");
 const fileInput = document.getElementById("avatar-input");
 const fileHint = document.getElementById("file-hint");
 const fileHintIco = document.getElementById("file-hint-ico");
+const emailInput = document.getElementById("email");
+const emailHint = document.getElementById("email-hint");
+const emailHintIco = document.getElementById("email-hint-ico");
 const avatarIcon = document.getElementById("avatar-icon");
 const btnsWrapper = document.getElementById("btnsWrapper");
 const removeBtn = document.getElementById("remove-btn");
@@ -12,6 +16,13 @@ const changeBtn = document.getElementById("change-btn");
 const dropzoneText = document.getElementById("dropzone-text");
 
 fileInput.addEventListener("change", uploadAvatar);
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (checkEmail(emailInput)) {
+    form.submit();
+  }
+});
 
 dropzone.addEventListener("dragover", function (e) {
   e.preventDefault();
@@ -45,7 +56,9 @@ function uploadAvatar() {
   let avatarLink = URL.createObjectURL(file);
   avatarWrapper.style.backgroundImage = `url(${avatarLink})`;
   avatarIcon.style.display = "none";
-  fileHint.innerText = "";
+  fileHint.innerHTML =
+    '<span class="ticket-form__hint-ico" id="file-hint-ico"></span>Upload your photo (JPG or PNG, max size: 500KB).';
+  fileHint.classList.remove("error");
   showBtns();
 }
 
@@ -63,6 +76,24 @@ function removeAvatar() {
 
 function showFileError() {
   fileHint.innerHTML =
-    "<span class='ticket-form__hint-ico ticket-form__hint-ico--error'></span>File too large. Please upload a photo under 500KB.";
-  fileHint.classList.add("ticket-form__hint--error");
+    "<span class='ticket-form__hint-ico ico-error'></span>File too large. Please upload a photo under 500KB.";
+  fileHint.classList.add("error");
+}
+
+function checkEmail(email) {
+  let isValid = false;
+  const emailPattern = /^[a-z0-9.+_%-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i;
+
+  if (!emailPattern.test(email.value)) {
+    email.style.margin = "12px 0 0";
+    emailHint.style.display = "block";
+    emailHint.classList.add("error");
+    emailHintIco.classList.add("ico-error");
+  } else {
+    emailHint.style.display = "none";
+    email.style.margin = "10px 0 20px";
+    isValid = true;
+  }
+
+  return isValid;
 }

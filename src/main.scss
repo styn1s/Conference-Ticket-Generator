@@ -146,7 +146,12 @@ body {
   color: $hint-color;
 }
 
-.ticket-form__hint--error {
+.ticket-form__hint:last-of-type {
+  display: none;
+  margin-bottom: 20px;
+}
+
+.error {
   color: $orange;
 }
 
@@ -163,7 +168,7 @@ body {
   mask-repeat: no-repeat;
 }
 
-.ticket-form__hint-ico--error {
+.ico-error {
   background-color: $orange;
 }
 

@@ -136,7 +136,12 @@ body {
   color: hsl(245, 15%, 58%);
 }
 
-.ticket-form__hint--error {
+.ticket-form__hint:last-of-type {
+  display: none;
+  margin-bottom: 20px;
+}
+
+.error {
   color: hsl(7, 88%, 67%);
 }
 
@@ -155,7 +160,7 @@ body {
           mask-repeat: no-repeat;
 }
 
-.ticket-form__hint-ico--error {
+.ico-error {
   background-color: hsl(7, 88%, 67%);
 }
 

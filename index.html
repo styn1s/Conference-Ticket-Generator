@@ -34,7 +34,8 @@
         class="main__ticket-form"
         id="ticket-form"
         name="ticket-form"
-        method="get"
+        method="post"
+        novalidate
       >
         <label class="ticket-form__label" for="avatar">Upload avatar</label>
         <label class="dropzone" id="dropzone" for="avatar-input">
@@ -81,6 +82,9 @@
           id="email"
           placeholder="example@email.com"
         />
+        <p class="ticket-form__hint" id="email-hint">
+          <span class="ticket-form__hint-ico" id="email-hint-ico"></span>Please enter a valid email address.
+        </p>
 
         <label class="ticket-from__label" for="github">GitHub Username</label>
         <input
