@@ -1,5 +1,7 @@
 const MAX_SIZE = 500 * 1024;
 
+const mainSection = document.getElementById("main");
+const heroSection = document.getElementById("hero");
 const form = document.getElementById("ticket-form");
 const dropzone = document.getElementById("dropzone");
 const avatarWrapper = document.getElementById("avatar-wrapper");
@@ -20,7 +22,7 @@ fileInput.addEventListener("change", uploadAvatar);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (checkEmail(emailInput)) {
-    form.submit();
+    showTicket();
   }
 });
 
@@ -96,4 +98,9 @@ function checkEmail(email) {
   }
 
   return isValid;
+}
+
+function showTicket() {
+  mainSection.style.visibility = "hidden";
+  heroSection.style.visibility = "hidden";
 }

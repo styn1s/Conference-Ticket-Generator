@@ -18,7 +18,7 @@
         src="/src/assets/images/logo-full.svg"
         alt="Logo"
       />
-      <div class="hero">
+      <div class="hero" id="hero">
         <h1 class="hero__title">
           Your Journey to Coding Conf 2026 Starts Here!
         </h1>
@@ -28,7 +28,7 @@
       </div>
     </header>
 
-    <main class="main">
+    <main class="main" id="main">
       <form
         action=""
         class="main__ticket-form"
@@ -63,7 +63,8 @@
           </p>
         </label>
         <p class="ticket-form__hint" id="file-hint">
-          <span class="ticket-form__hint-ico" id="file-hint-ico"></span>Upload your photo (JPG or PNG, max size: 500KB).
+          <span class="ticket-form__hint-ico" id="file-hint-ico"></span>Upload
+          your photo (JPG or PNG, max size: 500KB).
         </p>
 
         <label class="ticket-form__label" for="fullname">Full Name</label>
@@ -83,7 +84,8 @@
           placeholder="example@email.com"
         />
         <p class="ticket-form__hint" id="email-hint">
-          <span class="ticket-form__hint-ico" id="email-hint-ico"></span>Please enter a valid email address.
+          <span class="ticket-form__hint-ico" id="email-hint-ico"></span>Please
+          enter a valid email address.
         </p>
 
         <label class="ticket-from__label" for="github">GitHub Username</label>
@@ -102,6 +104,28 @@
         />
       </form>
     </main>
+
+    <section class="success" id="success">
+      <h1 class="success__title">
+        Congrats, <span class="success__firstname">Jonatan</span>
+        <span class="success__lastname">Kristof</span>! Your ticket is ready.
+      </h1>
+      <p class="success__text">
+        We've emailed your ticket to
+        <span class="success__email">jonatan@email.com</span> and will send
+        updates in the run up to the event.
+      </p>
+
+      <section class="success__ticket">
+        <div class="success__ticket-info">
+          <img class="ticket-info__logo" src="/src/assets/images/logo-mark.svg" alt="Logo mark">
+          <div class="ticket-info__wrapper">
+            <h1 class="ticket-info__title">Coding Conf</h1>
+            <p class="ticket-info__text">Jan 31, 2027 / Austin, TX</p>
+          </div>
+        </div>
+      </section>
+    </section>
 
     <img
       id="pattern-circle-top"

@@ -32,6 +32,7 @@ body {
 }
 
 .main__ticket-form {
+  visibility: hidden;
   width: 90%;
   margin: 2rem auto 7rem;
   justify-content: flex-start;
@@ -43,6 +44,7 @@ body {
 }
 
 .hero {
+  visibility: hidden;
   text-align: center;
 }
 .hero__title {
@@ -195,6 +197,77 @@ body {
   color: hsl(248, 70%, 10%);
   background-color: hsl(7, 88%, 67%);
   cursor: pointer;
+}
+
+.success {
+  position: absolute;
+  top: 11.5%;
+  text-align: center;
+}
+.success__title {
+  width: 96%;
+  margin: auto;
+  font-size: 1.8rem;
+}
+.success__firstname, .success__lastname {
+  background-image: linear-gradient(to right, hsl(7, 86%, 67%), hsl(0, 0%, 100%));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+.success__text {
+  width: 90%;
+  margin: 20px auto;
+  color: hsl(252, 6%, 83%);
+  line-height: 1.3;
+  font-size: 1.125rem;
+}
+.success__email {
+  color: hsl(7, 88%, 67%);
+}
+.success__ticket {
+  width: 90%;
+  height: 9.9rem;
+  margin: 5rem auto 0;
+  padding: 1.3rem;
+  background-image: url("/src/assets/images/pattern-ticket.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.success__ticket-info {
+  display: flex;
+  gap: 15px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.ticket-info__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ticket-info__title,
+.ticket-info__text {
+  margin: 0;
+  text-align: left;
+}
+
+.ticket-info__title {
+  font-size: 1.4rem;
+  margin-top: -3px;
+}
+
+.ticket-info__text {
+  color: hsl(252, 6%, 83%);
+  font-size: 0.8rem;
+}
+
+.ticket-info__logo {
+  width: 2rem;
+  height: -moz-min-content;
+  height: min-content;
 }
 
 #pattern-circle-top {
