@@ -32,7 +32,6 @@ body {
 }
 
 .main__ticket-form {
-  visibility: hidden;
   width: 90%;
   margin: 2rem auto 7rem;
   justify-content: flex-start;
@@ -44,7 +43,6 @@ body {
 }
 
 .hero {
-  visibility: hidden;
   text-align: center;
 }
 .hero__title {
@@ -203,6 +201,7 @@ body {
   position: absolute;
   top: 11.5%;
   text-align: center;
+  visibility: hidden;
 }
 .success__title {
   width: 96%;
@@ -226,6 +225,7 @@ body {
   color: hsl(7, 88%, 67%);
 }
 .success__ticket {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -292,8 +292,7 @@ body {
 
 .user-info__avatar {
   width: 3rem;
-  height: -moz-min-content;
-  height: min-content;
+  height: 3rem;
   border-radius: 0.4rem;
 }
 
@@ -314,6 +313,17 @@ body {
   width: 17px;
   height: 17px;
   background: url("/src/assets/images/icon-github.svg") center/contain;
+}
+
+.ticket__number {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-size: 1.25rem;
+  color: hsl(245, 15%, 58%);
+  writing-mode: vertical-rl;
 }
 
 #pattern-circle-top {

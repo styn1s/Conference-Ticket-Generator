@@ -1,7 +1,9 @@
-const MAX_SIZE = 500 * 1024;
+const MAX_SIZE = 5000 * 1024;
 
 const mainSection = document.getElementById("main");
 const heroSection = document.getElementById("hero");
+const success = document.getElementById("success");
+const ticketAvatar = document.getElementById("ticket-avatar");
 const form = document.getElementById("ticket-form");
 const dropzone = document.getElementById("dropzone");
 const avatarWrapper = document.getElementById("avatar-wrapper");
@@ -55,7 +57,7 @@ function uploadAvatar() {
     return;
   }
 
-  let avatarLink = URL.createObjectURL(file);
+  let avatarLink = getImgUrl(file);
   avatarWrapper.style.backgroundImage = `url(${avatarLink})`;
   avatarIcon.style.display = "none";
   fileHint.innerHTML =
@@ -101,6 +103,14 @@ function checkEmail(email) {
 }
 
 function showTicket() {
+  let avatarLink = getImgUrl(fileInput.files[0]);
+  ticketAvatar.src = avatarLink;
+
   mainSection.style.visibility = "hidden";
   heroSection.style.visibility = "hidden";
+  success.style.visibility = "visible";
+}
+
+function getImgUrl(file) {
+  return URL.createObjectURL(file);
 }
