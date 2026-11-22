@@ -1,15 +1,22 @@
-const MAX_SIZE = 5000 * 1024;
+const MAX_SIZE = 50000 * 1024;
 
 const mainSection = document.getElementById("main");
 const heroSection = document.getElementById("hero");
 const success = document.getElementById("success");
+const firstName = document.getElementById("firstname");
+const lastName = document.getElementById("lastname");
 const ticketAvatar = document.getElementById("ticket-avatar");
+const ticketFullName = document.getElementById("ticket-fullname");
+const ticketEmail = document.getElementById("ticket-email");
+const ticketGithub = document.getElementById("ticket-github");
 const form = document.getElementById("ticket-form");
 const dropzone = document.getElementById("dropzone");
 const avatarWrapper = document.getElementById("avatar-wrapper");
 const fileInput = document.getElementById("avatar-input");
 const fileHint = document.getElementById("file-hint");
 const fileHintIco = document.getElementById("file-hint-ico");
+const nameInput = document.getElementById("fullname");
+const githubInput = document.getElementById("github");
 const emailInput = document.getElementById("email");
 const emailHint = document.getElementById("email-hint");
 const emailHintIco = document.getElementById("email-hint-ico");
@@ -104,7 +111,14 @@ function checkEmail(email) {
 
 function showTicket() {
   let avatarLink = getImgUrl(fileInput.files[0]);
+  let splitedName = nameInput.value.split(" ");
+
   ticketAvatar.src = avatarLink;
+  ticketFullName.innerText = nameInput.value;
+  ticketGithub.innerText = githubInput.value;
+  firstName.innerText = splitedName[0];
+  lastName.innerText = splitedName[1];
+  ticketEmail.innerText = emailInput.value;
 
   mainSection.style.visibility = "hidden";
   heroSection.style.visibility = "hidden";
