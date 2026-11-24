@@ -1,5 +1,9 @@
 const MAX_SIZE = 50000 * 1024;
+const TICKET_NUM_SIZE = 6;
+const START_DATE = Temporal.PlainDate.from("2026-12-01");
+const END_DATE = Temporal.PlainDate.from("2027-12-31");
 
+const body = document.getElementById("body");
 const mainSection = document.getElementById("main");
 const heroSection = document.getElementById("hero");
 const success = document.getElementById("success");
@@ -9,6 +13,8 @@ const ticketAvatar = document.getElementById("ticket-avatar");
 const ticketFullName = document.getElementById("ticket-fullname");
 const ticketEmail = document.getElementById("ticket-email");
 const ticketGithub = document.getElementById("ticket-github");
+const ticketNum = document.getElementById("ticket-number");
+const ticketDate = document.getElementById("ticket-date");
 const form = document.getElementById("ticket-form");
 const dropzone = document.getElementById("dropzone");
 const avatarWrapper = document.getElementById("avatar-wrapper");
@@ -113,18 +119,38 @@ function showTicket() {
   let avatarLink = getImgUrl(fileInput.files[0]);
   let splitedName = nameInput.value.split(" ");
 
+  ticketDate.innerText = getRandomDate(START_DATE, END_DATE);
   ticketAvatar.src = avatarLink;
   ticketFullName.innerText = nameInput.value;
   ticketGithub.innerText = githubInput.value;
   firstName.innerText = splitedName[0];
   lastName.innerText = splitedName[1];
   ticketEmail.innerText = emailInput.value;
+  ticketNum.innerText = getTicketNum();
 
   mainSection.style.visibility = "hidden";
   heroSection.style.visibility = "hidden";
   success.style.visibility = "visible";
+  body.classList.add("positioned-bg");
 }
 
 function getImgUrl(file) {
   return URL.createObjectURL(file);
+}
+
+function getTicketNum() {
+  let ticketNum = Math.floor(Math.random() * 10000).toString();
+  return "#" + ticketNum.padStart(TICKET_NUM_SIZE, "0");
+}
+
+function getRandomDate(start, end) {
+  let totalDays = start.until(end, { largestUnit: "day" }).days;
+  let randomDays = Math.floor(Math.random() * (totalDays + 1));
+  const randomDate = start.add({ days: randomDays })
+
+  return randomDate.toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  })
 }

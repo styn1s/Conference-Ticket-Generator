@@ -9,20 +9,25 @@ $orange: hsl(7, 88%, 67%);
   font-family: "Inconsolata";
 }
 
-html,
-body {
-  height: fit-content;
-  overflow-x: hidden;
-}
-
 body {
   position: relative;
   margin: 0;
   background-image: url("/src/assets/images/background-mobile.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: -10% 100%;
   background-size: cover;
   color: $primary-color;
+}
+
+html, body {
+  height: fit-content;
+  overflow-x: hidden;
+}
+
+.positioned-bg {
+  height: 100dvh;
+  overflow: hidden;
+  background-position: -10% 100%;
 }
 
 .header,
@@ -206,7 +211,8 @@ body {
 
 .success {
   position: absolute;
-  top: 11.5%;
+  top: 15%;
+  left: 0;
   text-align: center;
   visibility: hidden;
 

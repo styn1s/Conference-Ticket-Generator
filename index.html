@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ticket Generator</title>
   </head>
-  <body>
+  <body id="body">
     <header class="header">
       <img
         class="header__logo"
@@ -121,7 +121,7 @@
           <img class="ticket-info__logo" src="/src/assets/images/logo-mark.svg" alt="Logo mark">
           <div class="ticket-info__wrapper">
             <h1 class="ticket-info__title">Coding Conf</h1>
-            <p class="ticket-info__text">Jan 31, 2027 / Austin, TX</p>
+            <p class="ticket-info__text"><span class="ticket-info__date" id="ticket-date">Jan 31, 2027</span> / Austin, TX</p>
           </div>
         </div>
 
@@ -133,7 +133,7 @@
           </div>
         </div>
 
-        <p class="ticket__number">#01609</p>
+        <p class="ticket__number" id="ticket-number">#01609</p>
       </section>
     </section>
 
