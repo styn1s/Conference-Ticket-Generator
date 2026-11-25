@@ -1,4 +1,4 @@
-const MAX_SIZE = 50000 * 1024;
+const MAX_SIZE = 5000 * 1024;
 const TICKET_NUM_SIZE = 6;
 const START_DATE = Temporal.PlainDate.from("2026-12-01");
 const END_DATE = Temporal.PlainDate.from("2027-12-31");
@@ -36,8 +36,13 @@ fileInput.addEventListener("change", uploadAvatar);
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (checkEmail(emailInput)) {
+  const emailOk = checkEmail(emailInput);
+  const fileError = checkFile(fileInput.files[0]);
+
+  if (emailOk && !fileError) {
     showTicket();
+  } else if (fileError) {
+    showFileError(fileError);
   }
 });
 
@@ -63,10 +68,10 @@ changeBtn.addEventListener("click", (e) => {
 
 function uploadAvatar() {
   const file = fileInput.files[0];
-  if (!file) return;
+  const errorMsg = checkFile(file);
 
-  if (file.size > MAX_SIZE) {
-    showFileError();
+  if (errorMsg) {
+    showFileError(errorMsg);
     return;
   }
 
@@ -74,9 +79,22 @@ function uploadAvatar() {
   avatarWrapper.style.backgroundImage = `url(${avatarLink})`;
   avatarIcon.style.display = "none";
   fileHint.innerHTML =
-    '<span class="ticket-form__hint-ico" id="file-hint-ico"></span>Upload your photo (JPG or PNG, max size: 500KB).';
+    '<span class="ticket-form__hint-ico" id="file-hint-ico"></span>Upload your photo (JPG or PNG, max size: 5MB).';
   fileHint.classList.remove("error");
   showBtns();
+}
+
+function checkFile(file) {
+  let errorMsg = "";
+
+  if (!file) {
+    errorMsg = "Please upload your photo (JPG or PNG, max size: 5MB).";
+  } else if (file.size > MAX_SIZE) {
+    errorMsg = "File too large. Please upload a photo under 5MB."
+    fileInput.value = "";
+  }
+
+  return errorMsg;
 }
 
 function showBtns() {
@@ -89,11 +107,12 @@ function removeAvatar() {
   btnsWrapper.style.display = "none";
   avatarIcon.style.display = "block";
   dropzoneText.style.display = "block";
+  fileInput.value = "";
 }
 
-function showFileError() {
+function showFileError(errorMsg) {
   fileHint.innerHTML =
-    "<span class='ticket-form__hint-ico ico-error'></span>File too large. Please upload a photo under 500KB.";
+    `<span class='ticket-form__hint-ico ico-error'></span>${errorMsg}`;
   fileHint.classList.add("error");
 }
 
@@ -146,11 +165,11 @@ function getTicketNum() {
 function getRandomDate(start, end) {
   let totalDays = start.until(end, { largestUnit: "day" }).days;
   let randomDays = Math.floor(Math.random() * (totalDays + 1));
-  const randomDate = start.add({ days: randomDays })
+  const randomDate = start.add({ days: randomDays });
 
   return randomDate.toLocaleString("en-US", {
     year: "numeric",
     month: "long",
-    day: "numeric"
-  })
+    day: "numeric",
+  });
 }
