@@ -2,11 +2,24 @@ const MAX_SIZE = 5000 * 1024;
 const TICKET_NUM_SIZE = 6;
 const START_DATE = Temporal.PlainDate.from("2026-12-01");
 const END_DATE = Temporal.PlainDate.from("2027-12-31");
+const MARGIN = {
+  add: "10px 0 20px",
+  remove: "12px 0 0",
+};
 
 const body = document.getElementById("body");
 const mainSection = document.getElementById("main");
 const heroSection = document.getElementById("hero");
 const success = document.getElementById("success");
+
+const fullname = document.getElementById("fullname");
+const fullnameHint = document.getElementById("fullname-hint");
+const fullnameHintIco = document.getElementById("fullname-hint-ico");
+
+const github = document.getElementById("github");
+const githubHint = document.getElementById("github-hint");
+const githubHintIco = document.getElementById("github-hint-ico");
+
 const firstName = document.getElementById("firstname");
 const lastName = document.getElementById("lastname");
 const ticketAvatar = document.getElementById("ticket-avatar");
@@ -36,13 +49,25 @@ fileInput.addEventListener("change", uploadAvatar);
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const emailOk = checkEmail(emailInput);
+  const emailError = checkEmail(emailInput);
   const fileError = checkFile(fileInput.files[0]);
+  const nameError = checkName(nameInput);
+  const githubError = checkGithub(githubInput);
 
-  if (emailOk && !fileError) {
+  if (!emailError && !fileError && !nameError && !githubError) {
     showTicket();
-  } else if (fileError) {
-    showFileError(fileError);
+  }
+  if (fileError) {
+    showError(fileHint, fileError);
+  }
+  if (nameError) {
+    showError(fullnameHint, nameError);
+  }
+  if (emailError) {
+    showError(emailHint, emailError);
+  }
+  if (githubError) {
+    showError(githubHint, githubError);
   }
 });
 
@@ -71,7 +96,7 @@ function uploadAvatar() {
   const errorMsg = checkFile(file);
 
   if (errorMsg) {
-    showFileError(errorMsg);
+    showError(fileHint, errorMsg);
     return;
   }
 
@@ -82,19 +107,6 @@ function uploadAvatar() {
     '<span class="ticket-form__hint-ico" id="file-hint-ico"></span>Upload your photo (JPG or PNG, max size: 5MB).';
   fileHint.classList.remove("error");
   showBtns();
-}
-
-function checkFile(file) {
-  let errorMsg = "";
-
-  if (!file) {
-    errorMsg = "Please upload your photo (JPG or PNG, max size: 5MB).";
-  } else if (file.size > MAX_SIZE) {
-    errorMsg = "File too large. Please upload a photo under 5MB."
-    fileInput.value = "";
-  }
-
-  return errorMsg;
 }
 
 function showBtns() {
@@ -110,28 +122,10 @@ function removeAvatar() {
   fileInput.value = "";
 }
 
-function showFileError(errorMsg) {
-  fileHint.innerHTML =
-    `<span class='ticket-form__hint-ico ico-error'></span>${errorMsg}`;
-  fileHint.classList.add("error");
-}
-
-function checkEmail(email) {
-  let isValid = false;
-  const emailPattern = /^[a-z0-9.+_%-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i;
-
-  if (!emailPattern.test(email.value)) {
-    email.style.margin = "12px 0 0";
-    emailHint.style.display = "block";
-    emailHint.classList.add("error");
-    emailHintIco.classList.add("ico-error");
-  } else {
-    emailHint.style.display = "none";
-    email.style.margin = "10px 0 20px";
-    isValid = true;
-  }
-
-  return isValid;
+function showError(elem, errorMsg) {
+  elem.innerHTML = `<span class='ticket-form__hint-ico ico-error'></span>${errorMsg}`;
+  elem.classList.add("error");
+  elem.style.display = "block";
 }
 
 function showTicket() {
@@ -172,4 +166,72 @@ function getRandomDate(start, end) {
     month: "long",
     day: "numeric",
   });
+}
+
+function checkFile(file) {
+  let errorMsg = "";
+
+  if (!file) {
+    errorMsg = "Please upload your photo (JPG or PNG, max size: 5MB).";
+  } else if (file.size > MAX_SIZE) {
+    errorMsg = "File too large. Please upload a photo under 5MB.";
+    fileInput.value = "";
+  }
+
+  return errorMsg;
+}
+
+function checkEmail(email) {
+  let errorMsg = "";
+  const emailPattern = /^[a-z0-9.+_%-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i;
+
+  if (!emailPattern.test(email.value)) {
+    errorMsg = "Please enter a valid email.";
+    email.style.margin = MARGIN.remove;
+  } else {
+    email.style.margin = MARGIN.add;
+    emailHint.style.display = "none";
+  }
+
+  return errorMsg;
+}
+
+function checkName(fullname) {
+  let errorMsg = "";
+
+  if (!fullname.value) {
+    errorMsg = "Please enter your fullname.";
+    fullname.style.margin = MARGIN.remove;
+  } else if (
+    fullname.value.split(" ").length === 1 ||
+    fullname.value.split(" ").length > 2
+  ) {
+    errorMsg = "Fullname must consist of 2 words";
+    fullname.style.margin = MARGIN.remove;
+  } else {
+    fullname.style.margin = MARGIN.add;
+    fullnameHint.style.display = "none";
+  }
+
+  return errorMsg;
+}
+
+function checkGithub(nickname) {
+  let errorMsg = "";
+
+  if (!nickname.value) {
+    errorMsg = "Please enter your nickname.";
+    nickname.style.margin = MARGIN.remove;
+  } else if (nickname.value.split(" ").length > 1) {
+    errorMsg = "Nickname must consist of 1 word";
+    nickname.style.margin = MARGIN.remove;
+  } else if ([...nickname.value][0] != "@") {
+    errorMsg = "Nickname must starting with '@'";
+    nickname.style.margin = MARGIN.remove;
+  } else {
+    nickname.style.margin = MARGIN.add;
+    githubHint.style.display = "none";
+  }
+
+  return errorMsg;
 }

@@ -14,12 +14,13 @@ body {
   margin: 0;
   background-image: url("/src/assets/images/background-mobile.png");
   background-repeat: no-repeat;
-  background-position: -10% 100%;
+  background-position: -1% 100%;
   background-size: cover;
   color: $primary-color;
 }
 
-html, body {
+html,
+body {
   height: fit-content;
   overflow-x: hidden;
 }
@@ -146,16 +147,20 @@ html, body {
 }
 
 .ticket-form__hint {
+  display: none;
   position: relative;
   line-height: 1.6;
   padding-left: 1.5rem;
   font-size: 0.75rem;
   color: $hint-color;
-}
 
-.ticket-form__hint:last-of-type {
-  display: none;
-  margin-bottom: 20px;
+  &:first-of-type {
+    display: block;
+  }
+
+  &:last-of-type {
+    margin-bottom: 20px;
+  }
 }
 
 .error {
@@ -167,7 +172,6 @@ html, body {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  display: inline-block;
   width: 1rem;
   height: 1rem;
   background-color: $hint-color;
