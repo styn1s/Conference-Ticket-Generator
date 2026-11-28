@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "vite": "^8.3.5"
+  },
+  "dependencies": {
+    "temporal-polyfill": "^1.0.8"
   }
 }

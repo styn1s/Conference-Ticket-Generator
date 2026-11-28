@@ -1,3 +1,8 @@
+if (typeof Temporal === "undefined") {
+  const module = await import("temporal-polyfill");
+  globalThis.Temporal = module.Temporal;
+}
+
 const MAX_SIZE = 5000 * 1024;
 const TICKET_NUM_SIZE = 6;
 const START_DATE = Temporal.PlainDate.from("2026-12-01");
@@ -45,6 +50,9 @@ const removeBtn = document.getElementById("remove-btn");
 const changeBtn = document.getElementById("change-btn");
 const dropzoneText = document.getElementById("dropzone-text");
 
+const ORIGINAL_HTML = fileHint.innerHTML;
+let currentAvatarURL = null;
+
 fileInput.addEventListener("change", uploadAvatar);
 
 form.addEventListener("submit", (e) => {
@@ -77,7 +85,19 @@ dropzone.addEventListener("dragover", function (e) {
 
 dropzone.addEventListener("drop", function (e) {
   e.preventDefault();
-  fileInput.files = e.dataTransfer.files;
+  
+  if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+    const dt = new DataTransfer();
+
+    for (const file of e.dataTransfer.files) {
+      dt.items.add(file);
+    }
+
+    fileInput.files = dt.files;
+
+    fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
   uploadAvatar();
 });
 
@@ -100,12 +120,14 @@ function uploadAvatar() {
     return;
   }
 
-  let avatarLink = getImgUrl(file);
-  avatarWrapper.style.backgroundImage = `url(${avatarLink})`;
+  if (currentAvatarURL) {
+    URL.revokeObjectURL(currentAvatarURL);
+  }
+
+  currentAvatarURL = getImgUrl(file);
+  avatarWrapper.style.backgroundImage = `url(${currentAvatarURL})`;
   avatarIcon.style.display = "none";
-  fileHint.innerHTML =
-    '<span class="ticket-form__hint-ico" id="file-hint-ico"></span>Upload your photo (JPG or PNG, max size: 5MB).';
-  fileHint.classList.remove("error");
+  hideError(fileHint);
   showBtns();
 }
 
@@ -115,6 +137,10 @@ function showBtns() {
 }
 
 function removeAvatar() {
+  if (currentAvatarURL) {
+    URL.revokeObjectURL(currentAvatarURL);
+    currentAvatarURL = null;
+  }
   avatarWrapper.style.backgroundImage = "none";
   btnsWrapper.style.display = "none";
   avatarIcon.style.display = "block";
@@ -122,18 +148,26 @@ function removeAvatar() {
   fileInput.value = "";
 }
 
-function showError(elem, errorMsg) {
-  elem.innerHTML = `<span class='ticket-form__hint-ico ico-error'></span>${errorMsg}`;
-  elem.classList.add("error");
-  elem.style.display = "block";
+function showError(hint, msg) {
+  hint.innerHTML = `<span class='ticket-form__hint-ico ico-error'></span>${msg}`;
+  hint.classList.add("error");
+  hint.style.display = "block";
+}
+
+function hideError(hint) {
+  if (hint === fileHint) {
+    hint.innerHTML = ORIGINAL_HTML;
+    hint.classList.remove("error");
+    return;
+  }
+  hint.style.display = "none";
 }
 
 function showTicket() {
-  let avatarLink = getImgUrl(fileInput.files[0]);
-  let splitedName = nameInput.value.split(" ");
+  let splitedName = getFilteredName(nameInput);
 
   ticketDate.innerText = getRandomDate(START_DATE, END_DATE);
-  ticketAvatar.src = avatarLink;
+  ticketAvatar.src = currentAvatarURL;
   ticketFullName.innerText = nameInput.value;
   ticketGithub.innerText = githubInput.value;
   firstName.innerText = splitedName[0];
@@ -149,6 +183,10 @@ function showTicket() {
 
 function getImgUrl(file) {
   return URL.createObjectURL(file);
+}
+
+function getFilteredName(name) {
+  return name.value.trim().split(/\s+/);
 }
 
 function getTicketNum() {
@@ -176,6 +214,9 @@ function checkFile(file) {
   } else if (file.size > MAX_SIZE) {
     errorMsg = "File too large. Please upload a photo under 5MB.";
     fileInput.value = "";
+  } else if (!["image/jpeg", "image/png"].includes(file.type)) {
+    errorMsg = "Choose JPG or PNG file (max size: 5MB).";
+    fileInput.value = "";
   }
 
   return errorMsg;
@@ -190,7 +231,7 @@ function checkEmail(email) {
     email.style.margin = MARGIN.remove;
   } else {
     email.style.margin = MARGIN.add;
-    emailHint.style.display = "none";
+    hideError(emailHint);
   }
 
   return errorMsg;
@@ -198,21 +239,22 @@ function checkEmail(email) {
 
 function checkName(fullname) {
   let errorMsg = "";
+  let filteredName = getFilteredName(fullname);
 
   if (!fullname.value) {
     errorMsg = "Please enter your fullname.";
     fullname.style.margin = MARGIN.remove;
   } else if (
-    fullname.value.split(" ").length === 1 ||
-    fullname.value.split(" ").length > 2
+    filteredName.length === 1 ||
+    filteredName.length > 2
   ) {
     errorMsg = "Fullname must consist of 2 words";
     fullname.style.margin = MARGIN.remove;
   } else {
     fullname.style.margin = MARGIN.add;
-    fullnameHint.style.display = "none";
+    hideError(fullnameHint);
   }
-
+  console.log(filteredName);
   return errorMsg;
 }
 
@@ -225,12 +267,12 @@ function checkGithub(nickname) {
   } else if (nickname.value.split(" ").length > 1) {
     errorMsg = "Nickname must consist of 1 word";
     nickname.style.margin = MARGIN.remove;
-  } else if ([...nickname.value][0] != "@") {
+  } else if (!nickname.value.startsWith("@")) {
     errorMsg = "Nickname must starting with '@'";
     nickname.style.margin = MARGIN.remove;
   } else {
     nickname.style.margin = MARGIN.add;
-    githubHint.style.display = "none";
+    hideError(githubHint);
   }
 
   return errorMsg;
